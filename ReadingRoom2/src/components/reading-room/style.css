@@ -1,0 +1,46 @@
+.reading-room-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 6px;
+  min-height: 36px;
+  padding: 0 34px 0 16px;
+  border: 1px solid currentColor;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+}
+
+.reading-room-link:hover {
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.04);
+  box-shadow: inset 0 0 0 9999px rgba(0, 0, 0, 0.04);
+}
+
+.reading-room-link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.reading-room-link::after {
+  content: 'open_in_new';
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 0.875rem;
+  line-height: 1;
+  pointer-events: none;
+  text-transform: none;
+  letter-spacing: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+
+.reading-room-link-text {
+  line-height: 1.2;
+}
