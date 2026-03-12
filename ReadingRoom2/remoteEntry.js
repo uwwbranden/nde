@@ -1,7 +1,7 @@
 // Static container entry that exposes the same module names the NDE loader requests.
 const moduleMap = {
   './custom-module': () => import(new URL('./src/bootstrap.js', import.meta.url).href),
-  './ReadingRoomx': () => import(new URL('./src/bootstrap.js', import.meta.url).href),
+  './ReadingRoom': () => import(new URL('./src/bootstrap.js', import.meta.url).href),
 };
 
 export async function get(request) {
