@@ -1,15 +1,1 @@
-function getValueByPath(source, path) {
-  return path.split('.').reduce((value, key) => {
-    if (value == null) {
-      return '';
-    }
-    return value[key];
-  }, source);
-}
-
-export function renderTemplate(template, data) {
-  return template.replace(/\{\{\s*([a-zA-Z0-9_.]+)\s*\}\}/g, (_, path) => {
-    const value = getValueByPath(data, path);
-    return value == null ? '' : String(value);
-  });
-}
+export function renderTemplate(e,n){return e.replace(/\{\{\s*([a-zA-Z0-9_.]+)\s*\}\}/g,((e,r)=>{const t=function(e,n){return n.split(".").reduce(((e,n)=>null==e?"":e[n]),e)}(n,r);return null==t?"":String(t)}))}
