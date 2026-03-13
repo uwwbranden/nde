@@ -3,7 +3,6 @@ import { renderTemplate } from '../../lib/template.js';
 
 const TARGET_LDS08 =
   'Use the Request to view in Reading Room option above to arrange for viewing at your campus archives.';
-let debugModulePromise = null;
 
 function getRecordData(record) {
   if (record?.pnx?.display) {
@@ -15,21 +14,6 @@ function getRecordData(record) {
   }
 
   return record ?? null;
-}
-
-function shouldDebugLocally() {
-  const hostname = globalThis?.location?.hostname ?? '';
-  return hostname === 'localhost' || hostname === '127.0.0.1';
-}
-
-async function debugEvaluation(payload) {
-  if (!shouldDebugLocally()) {
-    return;
-  }
-
-  debugModulePromise ??= import('../../local/debug-reading-room.js').catch(() => null);
-  const debugModule = await debugModulePromise;
-  debugModule?.logReadingRoomEvaluation(payload);
 }
 
 function getHref(record) {
@@ -74,15 +58,6 @@ export default {
   async getState(ctx) {
     const href = getHref(ctx.record);
     const visible = isVisible(ctx.record, ctx.settings);
-
-    await debugEvaluation({
-      href,
-      visible,
-      hostComponent: ctx.hostComponent,
-      resolvedRecord: getRecordData(ctx.record),
-      settings: ctx.settings ?? {},
-      record: ctx.record
-    });
 
     return {
       visible,
