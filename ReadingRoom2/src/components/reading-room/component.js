@@ -3,16 +3,46 @@ import { renderTemplate } from '../../lib/template.js';
 
 const TARGET_LDS08 =
   'Use the Request to view in Reading Room option above to arrange for viewing at your campus archives.';
+let debugModulePromise = null;
+
+function getRecordData(record) {
+  if (record?.pnx?.display) {
+    return record;
+  }
+
+  if (record?.searchResult?.pnx?.display) {
+    return record.searchResult;
+  }
+
+  return record ?? null;
+}
+
+function shouldDebugLocally() {
+  const hostname = globalThis?.location?.hostname ?? '';
+  return hostname === 'localhost' || hostname === '127.0.0.1';
+}
+
+async function debugEvaluation(payload) {
+  if (!shouldDebugLocally()) {
+    return;
+  }
+
+  debugModulePromise ??= import('../../local/debug-reading-room.js').catch(() => null);
+  const debugModule = await debugModulePromise;
+  debugModule?.logReadingRoomEvaluation(payload);
+}
 
 function getHref(record) {
-  if (!record?.pnx?.display) {
+  const recordData = getRecordData(record);
+
+  if (!recordData?.pnx?.display) {
     return null;
   }
 
-  const titleVal = record?.pnx?.display?.title?.[0];
-  const creatorVal = record?.pnx?.display?.creator?.[0];
-  const identifierVal = record?.pnx?.display?.identifier?.[0];
-  const callNumberVal = record?.delivery?.bestlocation?.callNumber;
+  const titleVal = recordData?.pnx?.display?.title?.[0];
+  const creatorVal = recordData?.pnx?.display?.creator?.[0];
+  const identifierVal = recordData?.pnx?.display?.identifier?.[0];
+  const callNumberVal = recordData?.delivery?.bestlocation?.callNumber;
 
   const title = encodeURIComponent(titleVal || '');
   const au = encodeURIComponent(creatorVal || '');
@@ -23,13 +53,14 @@ function getHref(record) {
 }
 
 function isVisible(record, settings) {
+  const recordData = getRecordData(record);
   const showInBriefResults = parseBoolean(settings?.showInBriefResults, false);
   const isBriefResultsPath = (globalThis?.location?.pathname ?? '').startsWith('/nde/search');
   if (isBriefResultsPath && !showInBriefResults) {
     return false;
   }
 
-  const lds08Values = record?.pnx?.display?.lds08;
+  const lds08Values = recordData?.pnx?.display?.lds08;
   return Array.isArray(lds08Values) && lds08Values.some((value) =>
     typeof value === 'string' &&
     (value === TARGET_LDS08 || /request to view in reading room/i.test(value))
@@ -43,6 +74,15 @@ export default {
   async getState(ctx) {
     const href = getHref(ctx.record);
     const visible = isVisible(ctx.record, ctx.settings);
+
+    await debugEvaluation({
+      href,
+      visible,
+      hostComponent: ctx.hostComponent,
+      resolvedRecord: getRecordData(ctx.record),
+      settings: ctx.settings ?? {},
+      record: ctx.record
+    });
 
     return {
       visible,
