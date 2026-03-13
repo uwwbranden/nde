@@ -1,0 +1,1 @@
+export function getModuleParameters(t=[]){if(!Array.isArray(t))return null;const n=t.find((t=>"MODULE_PARAMETERS"===t?.provide));return n?.useValue??null}export async function loadFallbackSettings(t){const n=new URL("../settings.json",t);try{const t=await fetch(n);return t.ok?await t.json():{}}catch{return{}}}
