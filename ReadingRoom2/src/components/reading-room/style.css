@@ -3,27 +3,26 @@
 	align-items: center;
 	justify-content: center;
 	position: relative;
-    border-radius: .3125rem;
+    border-radius: .3rem;
     border: 1px solid var(--sys-primary);
 	color: var(--sys-primary);
     padding: 0 2rem 0 1rem;
     margin-top: .25rem;
 	text-decoration: none;
-	min-height: 36px;
+	min-height: 2rem;
 }
 
 .reading-room-link:hover {
-  text-decoration: none;
   background: var(--sys-inverse-on-surface);
 }
 
 .reading-room-link::after {
   content: 'open_in_new';
   position: absolute;
-  top: 6px;
-  right: 10px;
+  top: 0.25rem;
+  right: 0.25rem;
   font-family: 'Material Icons';
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   line-height: 1;
 }
 
