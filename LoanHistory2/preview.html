@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>LoanHistory Static Add-On Preview</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body {
+        font-family: Segoe UI, Arial, sans-serif;
+        margin: 24px;
+      }
+
+      .preview-card {
+        max-width: 760px;
+        padding: 20px;
+        border: 1px solid #d0d7de;
+        border-radius: 10px;
+      }
+
+      .preview-slot {
+        margin-top: 16px;
+        padding-top: 12px;
+        border-top: 1px solid #e5e7eb;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="preview-card">
+      <h1>LoanHistory Static Add-On Preview</h1>
+      <p>The preview page simulates NDE placing the LoanHistory element in the account loans section.</p>
+      <div class="preview-slot" id="slot"></div>
+    </div>
+    <script type="module">
+      import { bootstrapRemoteApp } from './src/bootstrap.js';
+
+      const runtime = await bootstrapRemoteApp();
+      const ctor = runtime.instance.getComponentRef('nde-account-section-results-top');
+      const tagName = 'preview-loan-history-element';
+      customElements.define(tagName, ctor);
+      document.getElementById('slot').appendChild(document.createElement(tagName));
+    </script>
+  </body>
+</html>

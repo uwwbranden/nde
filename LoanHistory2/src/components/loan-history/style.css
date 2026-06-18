@@ -1,0 +1,35 @@
+.loan-history-alert {
+  display: flex;
+  align-items: center;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 10px 15px;
+  border: 1px solid #60388b;
+  border-radius: 5px;
+  background: #f6f4fb;
+  color: #000;
+}
+
+.loan-history-alert__content {
+  width: 100%;
+}
+
+.loan-history-alert h3 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+  line-height: 1.25;
+}
+
+.loan-history-alert p {
+  margin: 0 0 8px;
+  line-height: 1.4;
+}
+
+.loan-history-alert p:last-child {
+  margin-bottom: 0;
+}
+
+.loan-history-alert a {
+  color: #002255;
+  text-decoration: underline;
+}
