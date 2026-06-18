@@ -3,7 +3,7 @@
     "html": [
       "<div id='overview-historic-loans-alert' class='loan-history-alert' role='note' aria-labelledby='loan-history-heading'>",
       "  <div class='loan-history-alert__content'>",
-      "    <h3 id='loan-history-heading'>Loan History</h3>",
+      "    <h3 id='loan-history-heading'>JSON - Loan History</h3>",
       "    <p>To protect your privacy, UW-Whitewater Libraries anonymizes all loan history data older than six months.</p>",
       "    <p>",
       "      To retain your future loan data, please",
