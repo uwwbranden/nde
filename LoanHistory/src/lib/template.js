@@ -1,0 +1,1 @@
+export function renderTemplate(e,n){return e.replace(/\{\{\s*([a-zA-Z0-9_.]+)\s*\}\}/g,((e,r)=>{const t=function(e,n){return n.split(".").reduce(((e,n)=>null==e?"":e[n]),e)}(n,r);return null==t?"":String(t)}))}

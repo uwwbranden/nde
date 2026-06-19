@@ -1,0 +1,1 @@
+const t={"./custom-module":()=>import(new URL("./src/bootstrap.js",import.meta.url).href),"./LoanHistory":()=>import(new URL("./src/bootstrap.js",import.meta.url).href)};export async function get(o){const r=t[o];if(!r)throw new Error(`Module "${o}" does not exist in container.`);const n=await r();return()=>n}export async function init(){}
