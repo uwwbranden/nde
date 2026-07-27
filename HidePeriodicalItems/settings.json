@@ -1,0 +1,7 @@
+{
+  "debug": true,
+  "locationMatchers": [
+    "current periodicals",
+	"PERCURR"
+  ]
+}
