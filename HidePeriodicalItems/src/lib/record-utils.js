@@ -61,7 +61,13 @@ export function toList(value) {
   }
 
   if (typeof value === 'string') {
-    return value.split(',').map((entry) => entry.trim()).filter(Boolean);
+    const trimmed = value.trim();
+    const content = trimmed.startsWith('[') && trimmed.endsWith(']') ? trimmed.slice(1, -1) : trimmed;
+
+    return content
+      .split(',')
+      .map((entry) => entry.trim().replace(/^['"]|['"]$/g, ''))
+      .filter(Boolean);
   }
 
   return [];
