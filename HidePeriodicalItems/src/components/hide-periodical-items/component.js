@@ -119,7 +119,6 @@ export function ensureItemsObserver(element, shouldHide) {
   const location = findLocationElement(element) ?? element;
   element.__hidePeriodicalItemsObserver = new MutationObserver(() => {
     setHidden(findLocationItemsElement(element), true);
-    setArrowHidden(element, true);
   });
   element.__hidePeriodicalItemsObserver.observe(location, {
     childList: true,
