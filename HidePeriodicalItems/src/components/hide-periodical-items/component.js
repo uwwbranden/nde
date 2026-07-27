@@ -1,6 +1,9 @@
 import { collectPrimitivePaths, normalizeText, parseBoolean, toList } from '../../lib/record-utils.js';
 import { getSettingValue } from '../../lib/settings.js';
 
+export { getSettingValue } from '../../lib/settings.js';
+export { parseBoolean } from '../../lib/record-utils.js';
+
 const DEFAULT_MATCHERS = ['current periodicals'];
 const LOCATION_KEY_PATTERN = /(location|library|collection|sublocation|callnumber|call_number|holding|availability|label|name|code|display)/i;
 
@@ -139,7 +142,6 @@ export default {
     const container = findLocationItemsElement(ctx.element);
 
     setHidden(container, shouldHide);
-    setArrowHidden(ctx.element, shouldHide);
     if (ctx.element.style) {
       ctx.element.style.display = 'none';
     }
@@ -157,6 +159,5 @@ export default {
   },
   cleanup(element) {
     setHidden(findLocationItemsElement(element), false);
-    setArrowHidden(element, false);
   }
 };
